@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { cartActions } from '../../store/cart-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions, sendCartData } from '../../store/cart-slice';
+import { uiActions } from '../../store/ui-slice';
 import ProductItem from './ProductItem';
 import classes from './Products.module.css';
 
@@ -20,9 +21,11 @@ const DUMMY_PRODUCTS = [
 
 const Products = (props) => {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   const addToCartHandler = (product) => {
     dispatch(cartActions.addItem(product));
+    dispatch(sendCartData());
   };
 
   return (
